@@ -71,7 +71,7 @@ const BurgerIcon = styled.div<{ $isOpen: boolean }>`
 
   div {
     width: 30px;
-    height: 3px;
+    height: 6px;
     background-color: #000000; /* Black to match the design */
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
@@ -101,7 +101,7 @@ const Menu = styled.div<{ $isMenuOpen: boolean }>`
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.95); /* Dark background for contrast */
+  background: #f5e3a9; /* Dark background for contrast */
   backdrop-filter: blur(12px); /* Modern blur effect */
   z-index: 1100;
   animation: fadeIn 0.3s ease-in-out;
