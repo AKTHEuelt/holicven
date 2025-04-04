@@ -119,12 +119,12 @@ const VinylImage = styled(Image).withConfig({
 
   /* Responsive image size */
   @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
   }
   @media (max-width: 480px) {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 250px;
   }
 `;
 
