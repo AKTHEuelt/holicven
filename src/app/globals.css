@@ -11,9 +11,9 @@
 
 /* Define Theme Variables */
 :root {
-  --background: #f5e3a9;
+  --background: #ffd781;
   --foreground: #171717;
-  --primary: #f5e3a9; /* Soft yellow */
+  --primary: #ffd781; /* Soft yellow */
   --secondary: #000000; /* Black */
   --accent: #ff4500; /* Accent color */
   --border-radius: 8px;
