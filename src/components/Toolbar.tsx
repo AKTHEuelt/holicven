@@ -11,7 +11,7 @@ const ToolbarWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 2rem;
-  background: linear-gradient(90deg, #f5e3a9 0%, #f5e3a9 100%); /* Subtle gradient with light yellow tones */
+  background: linear-gradient(90deg, #ffd781 0%, #ffd781 100%); /* Subtle gradient with light yellow tones */
   position: sticky;
   top: 0;
   left: 0;
@@ -24,7 +24,7 @@ const NavLinks = styled.div`
   display: flex;
   gap: 1rem;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     display: none; /* Hide on mobile, rely on burger menu */
     padding-top: 2rem; /* Adjusted padding for better alignment */
   }
@@ -65,7 +65,7 @@ const BurgerIcon = styled.div<{ $isOpen: boolean }>`
   padding: 10px;
   z-index: 1201;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     display: flex; /* Show on mobile */
   }
 
