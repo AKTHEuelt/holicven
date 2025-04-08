@@ -30,11 +30,12 @@
 
 /* Apply Global Styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
-  margin: 0;
-  padding: 0;
+  background-image: url('/newspaper.png');
+  background-size: cover; /* Adjusts the image to cover the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
 }
 
 /* Global Link Styles */

@@ -16,12 +16,42 @@ const spin = keyframes`
   }
 `;
 
-// Styled Components (unchanged)
 const PageContainer = styled.div`
-  background-color: #ffd781;
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: url("/image/newspaper.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: repeat;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  > * {
+    position: relative;
+    z-index: 3;
+  }
 `;
 
 const MainContent = styled.main`
@@ -63,7 +93,7 @@ const Section = styled.section`
 `;
 
 const Title = styled.h1`
-  color: #ffd781;
+  color: #ffffff;
   background-color: #000000;
   padding: 0.5rem 1rem;
   font-size: 6rem;
@@ -81,7 +111,7 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h2`
-  color: #ffd781;
+  color: #ffffff;
   background-color: #000000;
   padding: 0.5rem 1rem;
   font-size: 4.5rem;
@@ -98,7 +128,7 @@ const SubTitle = styled.h2`
   }
 `;
 
-const VinylImage = styled(Image).withConfig({
+const HØLICVEN = styled(Image).withConfig({
   shouldForwardProp: (prop) => prop !== "isSpinning",
 })<{ isSpinning: boolean }>`
   width: 350px;
@@ -123,6 +153,8 @@ const VinylImage = styled(Image).withConfig({
 `;
 
 const ContentContainer = styled.div`
+  background-color: #ffffff;
+  opacity: 0.9;
   text-align: left;
   max-width: 1000px;
   margin: 0 auto;
@@ -146,7 +178,7 @@ const ContentWord = styled.span<ContentWordProps>`
   font-size: 2.5rem;
 
   &:hover {
-    color: #ffd781;
+    color: #A2D5AB;
   }
 
   @media (max-width: 768px) {
@@ -167,7 +199,7 @@ const FestivalWordsSection = styled.section`
 `;
 
 const FestivalWordsTitle = styled.h2`
-  color: #ffd781;
+  color: #ffffff;
   background-color: #000000;
   padding: 0.5rem 1rem;
   font-size: 4.5rem;
@@ -207,7 +239,7 @@ const Keyword = styled.span<KeywordProps>`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #ffd781;
+    color: #A2D5AB;
   }
 
   @media (max-width: 768px) {
@@ -219,7 +251,7 @@ const Keyword = styled.span<KeywordProps>`
 `;
 
 const Footer = styled.footer`
-  background-color: #ffd781;
+  background-color: #A2D5AB;
   padding: 1rem;
   color: #000000;
   font-size: 2rem;
@@ -237,98 +269,116 @@ interface WordItem {
   size: string;
 }
 
+// Updated festival-related words to reflect Høl i CV’en’s broader activities
+const festivalWords: WordItem[] = [
+  { word: "høl i cv'en", size: "2.5rem" },
+  { word: "sandvika", size: "2.0rem" },
+  { word: "kaffe", size: "1.8rem" },
+  { word: "matvogn", size: "1.6rem" },
+  { word: "kafe", size: "2.3rem" },
+  { word: "samfunn", size: "1.9rem" },
+  { word: "arbeidstrening", size: "2.2rem" },
+  { word: "fellesskap", size: "2.0rem" },
+  { word: "recovery", size: "2.4rem" },
+  { word: "bærum kommune", size: "1.9rem" },
+  { word: "mental helse", size: "1.7rem" },
+  { word: "rusmestring", size: "2.1rem" },
+  { word: "kvalitet", size: "1.8rem" },
+  { word: "etiopiske bønner", size: "1.6rem" },
+  { word: "den gyldne bønne", size: "2.2rem" },
+  { word: "platemesse", size: "1.9rem" },
+  { word: "musikk", size: "2.3rem" },
+  { word: "kultur", size: "2.0rem" },
+  { word: "lokal støtte", size: "1.8rem" },
+  { word: "bærekraft", size: "1.7rem" },
+  { word: "inkludering", size: "2.2rem" },
+  { word: "sosialt arbeid", size: "2.5rem" },
+  { word: "nettverk", size: "1.9rem" },
+  { word: "håp", size: "2.0rem" },
+  { word: "tilhørighet", size: "2.2rem" },
+  { word: "arrangement", size: "1.8rem" },
+  { word: "sandvika platemesse", size: "2.2rem" },
+  { word: "entusiast", size: "2.5rem" },
+  { word: "opplevelse", size: "2.0rem" },
+  { word: "kaffekultur", size: "1.9rem" },
+  { word: "atmosfære", size: "2.2rem" },
+  { word: "lidenskap", size: "1.7rem" },
+  { word: "mestring", size: "2.5rem" },
+  { word: "lokale", size: "2.0rem" },
+  { word: "samhold", size: "2.3rem" },
+  { word: "kvalitetskaffe", size: "2.5rem" },
+  { word: "stemning", size: "2.0rem" },
+  { word: "tradisjon", size: "2.2rem" },
+  { word: "glede", size: "1.9rem" },
+].sort((a, b) => a.word.localeCompare(b.word, "no"));
+
+// Updated Home section words to introduce Høl i CV’en
+const homeWords: WordItem[] = [
+  { word: "høl i cv'en", size: "2.5rem" },
+  { word: "kaffe og fellesskap", size: "2.0rem" },
+  { word: "sandvika", size: "1.8rem" },
+  { word: "arbeidstrening", size: "2.2rem" },
+  { word: "recovery", size: "1.7rem" },
+  { word: "bærum kommune", size: "2.3rem" },
+];
+
+// Updated About section words to describe Høl i CV’en’s mission in more detail
+const aboutWords: WordItem[] = [
+  { word: "høl i cv'en", size: "2.5rem" },
+  { word: "støtte og mestring", size: "2.0rem" },
+  { word: "kaffe av kvalitet", size: "1.9rem" },
+  { word: "matvogn og kafe", size: "2.3rem" },
+  { word: "mental helse", size: "1.8rem" },
+  { word: "rusmestring", size: "1.7rem" },
+  { word: "fellesskap", size: "2.2rem" },
+  { word: "inkludering", size: "2.0rem" },
+  { word: "lokal støtte", size: "1.9rem" },
+  { word: "arbeidstrening", size: "2.1rem" },
+  { word: "recovery", size: "1.8rem" },
+  { word: "sandvika", size: "2.0rem" },
+  { word: "bærum kommune", size: "1.9rem" },
+  { word: "sosialt arbeid", size: "2.2rem" },
+  { word: "kaffekultur", size: "1.7rem" },
+  { word: "etiopiske bønner", size: "1.8rem" },
+  { word: "den gyldne bønne", size: "2.0rem" },
+  { word: "bærekraft", size: "1.9rem" },
+  { word: "samhold", size: "2.1rem" },
+  { word: "mestring", size: "1.8rem" },
+  { word: "tilhørighet", size: "2.0rem" },
+  { word: "kvalitetssikring", size: "1.9rem" },
+  { word: "lokale partnerskap", size: "2.2rem" },
+  { word: "håp og glede", size: "1.7rem" },
+  { word: "sosial inkludering", size: "2.1rem" },
+  { word: "kaffeopplæring", size: "1.8rem" },
+  { word: "samfunnsbygging", size: "2.0rem" },
+];
+
+// Updated Events section words to highlight Høl i CV’en’s events
+const eventsWords: WordItem[] = [
+  { word: "sandvika platemesse", size: "2.5rem" },
+  { word: "10. og 11. mai", size: "1.8rem" },
+  { word: "høl i cv'en", size: "2.2rem" },
+  { word: "k18", size: "1.6rem" },
+  { word: "kulturelle arrangementer", size: "2.3rem" },
+  { word: "musikk og vinyl", size: "2.0rem" },
+  { word: "kaffeservering", size: "1.9rem" },
+  { word: "kadettangen 18", size: "2.1rem" },
+  { word: "kl. 11-16.00", size: "1.8rem" },
+  { word: "samfunn og glede", size: "1.7rem" },
+];
+
+// Updated Contact section words for Høl i CV’en’s contact info
+const contactWords: WordItem[] = [
+  { word: "kontakt oss", size: "2.5rem" },
+  { word: "91773008", size: "2.0rem" },
+  { word: "høl i cv'en", size: "2.2rem" },
+  { word: "sandvika kafe", size: "2.3rem" },
+  { word: "bærum kommune", size: "1.9rem" },
+  { word: "bli med", size: "1.8rem" },
+];
+
 export default function Home() {
   const [isSpinning, setIsSpinning] = useState(false);
-
-  // Updated festival-related words
-  const festivalWords: WordItem[] = [
-    { word: "sandvika", size: "2.5rem" },
-    { word: "platemesse", size: "2.0rem" },
-    { word: "10. og 11. mai", size: "1.8rem" },
-    { word: "kl. 11-16.00", size: "1.6rem" },
-    { word: "høl i cv'en", size: "2.3rem" },
-    { word: "k18", size: "1.9rem" },
-    { word: "kadettangen 18", size: "2.2rem" },
-    { word: "hyggelig stemning", size: "2.0rem" },
-    { word: "kule artister", size: "2.4rem" },
-    { word: "bra servering", size: "1.9rem" },
-    { word: "fresh tea", size: "1.7rem" },
-    { word: "liora", size: "2.1rem" },
-    { word: "afterparty", size: "1.8rem" },
-    { word: "folkebadet", size: "1.6rem" },
-    { word: "spinning av skiver", size: "2.2rem" },
-    { word: "gratis bord", size: "1.9rem" },
-    { word: "musikk", size: "2.3rem" },
-    { word: "vinyl", size: "2.0rem" },
-    { word: "kultur", size: "1.8rem" },
-    { word: "retro", size: "1.7rem" },
-    { word: "samler", size: "2.2rem" },
-    { word: "plater", size: "2.5rem" },
-    { word: "lokal", size: "1.9rem" },
-    { word: "kunst", size: "2.0rem" },
-    { word: "samfunn", size: "2.2rem" },
-    { word: "arrangement", size: "1.8rem" },
-    { word: "nostalgi", size: "2.2rem" },
-    { word: "entusiast", size: "2.5rem" },
-    { word: "opplevelse", size: "2.0rem" },
-    { word: "vintage", size: "1.9rem" },
-    { word: "atmosfære", size: "2.2rem" },
-    { word: "lidenskap", size: "1.7rem" },
-    { word: "talentfulle", size: "2.5rem" },
-    { word: "lokale", size: "2.0rem" },
-    { word: "feiring", size: "2.3rem" },
-    { word: "samleobjekter", size: "2.5rem" },
-    { word: "stemning", size: "2.0rem" },
-    { word: "tradisjon", size: "2.2rem" },
-    { word: "glede", size: "1.9rem" },
-  ].sort((a, b) => a.word.localeCompare(b.word, "no"));
-
-  // Updated Home section words
-  const homeWords: WordItem[] = [
-    { word: "sandvika platemesse", size: "2.5rem" },
-    { word: "10. og 11. mai", size: "2.0rem" },
-    { word: "kl. 11-16.00", size: "1.8rem" },
-    { word: "høl i cv'en", size: "2.2rem" },
-    { word: "k18", size: "1.7rem" },
-    { word: "kadettangen 18", size: "2.3rem" },
-  ];
-
-  // Updated About section words
-  const aboutWords: WordItem[] = [
-    { word: "sandvika platemesse", size: "2.5rem" },
-    { word: "topp stemning", size: "2.0rem" },
-    { word: "hyggelige folk", size: "1.9rem" },
-    { word: "kule artister", size: "2.3rem" },
-    { word: "bra servering", size: "1.8rem" },
-    { word: "fresh tea stand", size: "1.7rem" },
-    { word: "musikk og kultur", size: "2.2rem" },
-    { word: "vinylplater", size: "2.0rem" },
-    { word: "lokal opplevelse", size: "1.9rem" },
-  ];
-
-  // Updated Events section words
-  const eventsWords: WordItem[] = [
-    { word: "10. og 11. mai", size: "2.5rem" },
-    { word: "kl. 11-16.00", size: "1.8rem" },
-    { word: "høl i cv'en", size: "2.2rem" },
-    { word: "k18", size: "1.6rem" },
-    { word: "liora på scenen", size: "2.3rem" },
-    { word: "flere kule artister", size: "2.0rem" },
-    { word: "fresh tea stand", size: "1.9rem" },
-    { word: "afterparty lørdag", size: "2.1rem" },
-    { word: "spinning av skiver", size: "1.8rem" },
-    { word: "folkebadet", size: "1.7rem" },
-  ];
-
-  // Updated Contact section words
-  const contactWords: WordItem[] = [
-    { word: "meld deg på", size: "2.5rem" },
-    { word: "91773008", size: "2.0rem" },
-    { word: "gratis bord", size: "1.8rem" },
-    { word: "høl i cv'en", size: "2.2rem" },
-    { word: "sandvika platemesse", size: "2.3rem" },
-    { word: "kontakt oss", size: "1.9rem" },
-  ];
 
   return (
     <PageContainer>
@@ -337,15 +387,15 @@ export default function Home() {
         <SectionContainer>
           {/* Home Section (Hero) */}
           <HeroSection id="home">
-            <Title>Sandvika Platemesse</Title>
+            <Title>Høl i CV´en</Title>
             <ContentContainer>
               {homeWords.map((word, index) => (
                 <ContentWord key={index}>{word.word}</ContentWord>
               ))}
             </ContentContainer>
-            <VinylImage
-              src="/image/vinyl.png"
-              alt="Vinylplate"
+            <HØLICVEN
+              src="/image/HØLICVEN.png"
+              alt="HØL I CVEN"
               width={200}
               height={200}
               isSpinning={isSpinning}
@@ -387,7 +437,7 @@ export default function Home() {
 
           {/* Festival Words Section */}
           <FestivalWordsSection id="festival-words">
-            <FestivalWordsTitle>Festivalord</FestivalWordsTitle>
+            <FestivalWordsTitle>Våre Verdier</FestivalWordsTitle>
             <KeywordsContainer>
               {festivalWords.map((item, index) => (
                 <Keyword key={index} style={{ fontSize: item.size }}>
@@ -398,7 +448,7 @@ export default function Home() {
           </FestivalWordsSection>
         </SectionContainer>
       </MainContent>
-      <Footer>Meld deg på: 91773008 | Drevet av Høl i CV´en Platemesse</Footer>
+      <Footer>Kontakt oss: 91773008 | Høl i CV´en - Kaffe, Fellesskap og Recovery</Footer>
     </PageContainer>
   );
 }

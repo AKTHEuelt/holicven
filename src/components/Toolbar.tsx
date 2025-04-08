@@ -11,7 +11,7 @@ const ToolbarWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 2rem;
-  background: linear-gradient(90deg, #ffd781 0%, #ffd781 100%); /* Subtle gradient with light yellow tones */
+  background: linear-gradient(90deg, #A2D5AB 0%, #A2D5AB 100%); /* Subtle gradient with light yellow tones */
   position: sticky;
   top: 0;
   left: 0;
@@ -32,7 +32,7 @@ const NavLinks = styled.div`
 
 // Nav link styling with modern hover effects
 const NavLink = styled.a`
-  color: #ffd781; /* Light yellow text */
+  color: #A2D5AB; /* Light yellow text */
   background-color: #000000; /* Black background */
   text-decoration: none; /* No underline */
   font-family: "Montserrat", Arial, sans-serif; /* Modern font with fallback */
@@ -50,8 +50,8 @@ const NavLink = styled.a`
   &:active {
     text-decoration: none; /* Ensure no underline on hover, visited, or active */
     background: linear-gradient(90deg, #333 0%, #444 100%); /* Gradient hover effect */
-    color: #ffd781; /* Keep light yellow on hover */
-    border: 1px solid #ffd781; /* Subtle border on hover */
+    color: #A2D5AB; /* Keep light yellow on hover */
+    border: 1px solid #A2D5AB; /* Subtle border on hover */
     transform: translateY(-2px); /* Slight lift on hover */
   }
 `;
@@ -101,7 +101,7 @@ const Menu = styled.div<{ $isMenuOpen: boolean }>`
   left: 0;
   height: 100%;
   width: 100%;
-  background: #ffd781; /* Dark background for contrast */
+  background: #A2D5AB; /* Dark background for contrast */
   backdrop-filter: blur(12px); /* Modern blur effect */
   z-index: 1100;
   animation: fadeIn 0.3s ease-in-out;
@@ -132,7 +132,7 @@ const MenuItem = styled.div<{ $isActive: boolean }>`
   font-family: "Montserrat", Arial, sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: ${({ $isActive }) => ($isActive ? "#ffd781" : "#ffd781")}; /* Light yellow text */
+  color: ${({ $isActive }) => ($isActive ? "#ffffff" : "#ffffff")}; /* Light yellow text */
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -147,10 +147,10 @@ const MenuItem = styled.div<{ $isActive: boolean }>`
   &:visited,
   &:active {
     text-decoration: none;
-    color: #ffd781;
+    color: #A2D5AB;
     transform: scale(1.1);
     background: linear-gradient(90deg, #333 0%, #444 100%); /* Gradient hover effect */
-    border: 1px solid #ffd781; /* Subtle border on hover */
+    border: 1px solid #A2D5AB; /* Subtle border on hover */
   }
 
   @media (max-width: 768px) {
@@ -165,7 +165,7 @@ const MenuItem = styled.div<{ $isActive: boolean }>`
 
 // Logo styling
 const Logo = styled.h1`
-  color: #ffd781; /* Light yellow text */
+  color: #A2D5AB; /* Light yellow text */
   background-color: #000000; /* Black background */
   padding: 0.5rem 1rem;
   margin: 0;
@@ -178,7 +178,7 @@ const Logo = styled.h1`
 
   &:hover {
     background: linear-gradient(90deg, #333 0%, #444 100%); /* Gradient hover effect */
-    color: #ffd781;
+    color: #A2D5AB;
     transform: translateY(-2px); /* Slight lift on hover */
   }
 
@@ -206,7 +206,7 @@ export default function Toolbar() {
     <>
       <ToolbarWrapper>
         <Link href="/">
-          <Logo>Sandvika Platemesse</Logo>
+          <Logo>Høl i CV´en</Logo>
         </Link>
         <NavLinks>
           <Link href="#about">
