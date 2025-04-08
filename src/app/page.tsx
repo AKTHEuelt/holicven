@@ -324,7 +324,7 @@ export default function Home() {
   const contactWords: WordItem[] = [
     { word: "meld deg på", size: "2.5rem" },
     { word: "91773008", size: "2.0rem" },
-    { word: "gratis bord på", size: "1.8rem" },
+    { word: "gratis bord", size: "1.8rem" },
     { word: "høl i cv'en", size: "2.2rem" },
     { word: "sandvika platemesse", size: "2.3rem" },
     { word: "kontakt oss", size: "1.9rem" },
