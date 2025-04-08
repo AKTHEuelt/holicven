@@ -21,7 +21,7 @@ const PageContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url("/image/newspaper.png");
+  background-image: url("/newspaper.png");
   background-size: 100%;
   background-position: center;
   background-repeat: repeat;
