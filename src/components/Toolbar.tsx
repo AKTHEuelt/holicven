@@ -31,7 +31,7 @@ const NavLinks = styled.div`
 `;
 
 // Nav link styling with modern hover effects
-const NavLink = styled.a`
+const NavLink = styled.button`
   color: #A2D5AB; /* Light yellow text */
   background-color: #000000; /* Black background */
   text-decoration: none; /* No underline */
@@ -44,6 +44,7 @@ const NavLink = styled.a`
   transition: all 0.3s ease; /* Smooth transition for hover effects */
   text-transform: uppercase;
   letter-spacing: 2px;
+  cursor: pointer;
 
   &:hover,
   &:visited,
@@ -209,14 +210,8 @@ export default function Toolbar() {
           <Logo>Høl i CV´en</Logo>
         </Link>
         <NavLinks>
-          <Link href="#about">
-            <NavLink>Om Oss</NavLink>
-          </Link>
-          <Link href="#events">
-            <NavLink>Arrangementer</NavLink>
-          </Link>
-          <Link href="#contact">
-            <NavLink>Kontakt</NavLink>
+          <Link href="/butikk">
+            <NavLink>Butikk</NavLink>
           </Link>
         </NavLinks>
         <BurgerIcon onClick={handleBurgerClick} $isOpen={isMenuOpen}>
@@ -228,21 +223,11 @@ export default function Toolbar() {
 
       <Menu $isMenuOpen={isMenuOpen}>
         <MenuItemsWrapper>
-          <Link href="#about">
+          <a href="/butikk">
             <MenuItem $isActive={false} onClick={handleTabClick}>
-              Om Oss
+              Butikk
             </MenuItem>
-          </Link>
-          <Link href="#events">
-            <MenuItem $isActive={false} onClick={handleTabClick}>
-              Arrangementer
-            </MenuItem>
-          </Link>
-          <Link href="#contact">
-            <MenuItem $isActive={false} onClick={handleTabClick}>
-              Kontakt
-            </MenuItem>
-          </Link>
+          </a>
         </MenuItemsWrapper>
       </Menu>
     </>
