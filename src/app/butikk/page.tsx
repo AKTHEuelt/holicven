@@ -478,44 +478,18 @@ export default function Butikk() {
             </TotalRow>
 
             {!showCheckout ? (
-              <Button onClick={() => setShowCheckout(true)} style={{ width: '100%', marginTop: '1.5rem' }}>
-                Til bestilling
-              </Button>
+              <>
+                <Button onClick={() => setShowCart(false)} style={{ width: '100%', marginTop: '1.5rem', backgroundColor: '#666' }}>
+                  Lukk
+                </Button>
+                <Button as="a" href="/cart" style={{ width: '100%', marginTop: '0.5rem', display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+                  Til bestilling
+                </Button>
+              </>
             ) : (
-              <div style={{ marginTop: '1.5rem' }}>
-                <FormInput
-                  type="text"
-                  placeholder="Navn"
-                  value={formData.customer_name}
-                  onChange={(e) => setFormData({ ...formData, customer_name: e.target.value })}
-                />
-                <FormInput
-                  type="email"
-                  placeholder="E-post"
-                  value={formData.customer_email}
-                  onChange={(e) => setFormData({ ...formData, customer_email: e.target.value })}
-                />
-                <FormInput
-                  type="tel"
-                  placeholder="Telefon"
-                  value={formData.customer_phone}
-                  onChange={(e) => setFormData({ ...formData, customer_phone: e.target.value })}
-                />
-                <FormTextarea
-                  placeholder="Leveringsadresse"
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                />
-                <Button onClick={submitOrder} disabled={loading} style={{ width: '100%' }}>
-                  {loading ? 'Sender...' : 'Bestill nå!'}
-                </Button>
-                <Button 
-                  onClick={() => setShowCheckout(false)} 
-                  style={{ width: '100%', marginTop: '0.5rem', backgroundColor: '#666' }}
-                >
-                  Tilbake
-                </Button>
-              </div>
+              <Button onClick={() => setShowCheckout(false)} style={{ width: '100%', marginTop: '0.5rem', backgroundColor: '#666' }}>
+                Tilbake
+              </Button>
             )}
 
             {success && (
