@@ -213,6 +213,9 @@ export default function Toolbar() {
           <Link href="/butikk">
             <NavLink>Butikk</NavLink>
           </Link>
+          <Link href="/cart">
+            <NavLink>Handlekurv</NavLink>
+          </Link>
         </NavLinks>
         <BurgerIcon onClick={handleBurgerClick} $isOpen={isMenuOpen}>
           <div />
@@ -226,6 +229,11 @@ export default function Toolbar() {
           <a href="/butikk">
             <MenuItem $isActive={false} onClick={handleTabClick}>
               Butikk
+            </MenuItem>
+          </a>
+          <a href="/cart">
+            <MenuItem $isActive={false} onClick={handleTabClick}>
+              Handlekurv
             </MenuItem>
           </a>
         </MenuItemsWrapper>
