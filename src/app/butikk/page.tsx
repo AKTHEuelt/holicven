@@ -355,7 +355,7 @@ export default function Butikk() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch('/api/products');
+      const res = await fetch('/api/products', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         setProducts(data);
