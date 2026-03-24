@@ -455,27 +455,61 @@ export default function Home() {
           <Section id="events">
             <SubTitle>Arrangementer</SubTitle>
             {events.length > 0 ? (
-              <ContentContainer style={{ width: '100%', gap: '2rem' }}>
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+                gap: '2rem',
+                width: '100%' 
+              }}>
                 {events.map((event) => (
                   <div key={event.id} style={{
                     background: '#fff',
+                    opacity: 0.95,
                     borderRadius: '12px',
-                    padding: '1.5rem',
-                    width: '100%',
-                    maxWidth: '600px',
-                    border: '2px solid #000'
+                    padding: '2rem',
+                    border: '3px solid #000',
+                    boxShadow: '4px 4px 0 #000',
+                    transition: 'transform 0.2s, box-shadow 0.2s'
                   }}>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '0.5rem' }}>
+                    <div style={{ 
+                      background: '#A2D5AB', 
+                      color: '#000',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '6px',
+                      display: 'inline-block',
+                      marginBottom: '1rem',
+                      fontWeight: 'bold',
+                      fontSize: '0.9rem'
+                    }}>
+                      📅 {formatDate(event.date)}
+                    </div>
+                    <h3 style={{ 
+                      fontSize: '1.8rem', 
+                      fontWeight: 'bold', 
+                      color: '#000', 
+                      marginBottom: '0.75rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px'
+                    }}>
                       {event.title}
                     </h3>
-                    <p style={{ color: '#666', marginBottom: '0.5rem' }}>{event.description}</p>
-                    <p style={{ color: '#A2D5AB', fontWeight: 'bold', background: '#000', display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
-                      📅 {formatDate(event.date)} | ⏰ {event.time}
+                    <p style={{ color: '#333', marginBottom: '1rem', lineHeight: '1.5' }}>
+                      {event.description}
                     </p>
-                    <p style={{ color: '#666', marginTop: '0.5rem' }}>📍 {event.location}</p>
+                    <div style={{ 
+                      display: 'flex', 
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      borderTop: '2px solid #000',
+                      paddingTop: '1rem',
+                      marginTop: 'auto'
+                    }}>
+                      <span style={{ color: '#000', fontWeight: 'bold' }}>⏰ {event.time}</span>
+                      <span style={{ color: '#666' }}>📍 {event.location}</span>
+                    </div>
                   </div>
                 ))}
-              </ContentContainer>
+              </div>
             ) : (
               <ContentContainer>
                 <ContentWord>Ingen arrangementer ennå</ContentWord>
