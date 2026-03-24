@@ -3,7 +3,7 @@
 
 import styled, { keyframes, css } from "styled-components";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Toolbar from "../components/Toolbar";
 
 // Spinning animation
@@ -269,7 +269,18 @@ interface WordItem {
   size: string;
 }
 
-// Updated festival-related words to reflect Høl i CV’en’s broader activities
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  image_url: string | null;
+  active: boolean;
+}
+
+// Updated festival-related words to reflect Høl i CV'en's broader activities
 const festivalWords: WordItem[] = [
   { word: "høl i cv'en", size: "2.5rem" },
   { word: "sandvika", size: "2.0rem" },
@@ -312,7 +323,7 @@ const festivalWords: WordItem[] = [
   { word: "glede", size: "1.9rem" },
 ].sort((a, b) => a.word.localeCompare(b.word, "no"));
 
-// Updated Home section words to introduce Høl i CV’en
+// Updated Home section words to introduce Høl i CV'en
 const homeWords: WordItem[] = [
   { word: "høl i cv'en", size: "2.5rem" },
   { word: "kaffe og fellesskap", size: "2.0rem" },
@@ -322,7 +333,7 @@ const homeWords: WordItem[] = [
   { word: "bærum kommune", size: "2.3rem" },
 ];
 
-// Updated About section words to describe Høl i CV’en’s mission in more detail
+// Updated About section words to describe Høl i CV'en's mission in more detail
 const aboutWords: WordItem[] = [
   { word: "høl i cv'en", size: "2.5rem" },
   { word: "støtte og mestring", size: "2.0rem" },
@@ -353,7 +364,7 @@ const aboutWords: WordItem[] = [
   { word: "samfunnsbygging", size: "2.0rem" },
 ];
 
-// Updated Events section words to highlight Høl i CV’en’s events
+// Updated Events section words to highlight Høl i CV'en's events
 const eventsWords: WordItem[] = [
   { word: "sandvika platemesse", size: "2.5rem" },
   { word: "10. og 11. mai", size: "1.8rem" },
@@ -367,7 +378,7 @@ const eventsWords: WordItem[] = [
   { word: "samfunn og glede", size: "1.7rem" },
 ];
 
-// Updated Contact section words for Høl i CV’en’s contact info
+// Updated Contact section words for Høl i CV'en's contact info
 const contactWords: WordItem[] = [
   { word: "kontakt oss", size: "2.5rem" },
   { word: "91773008", size: "2.0rem" },
@@ -379,6 +390,31 @@ const contactWords: WordItem[] = [
 
 export default function Home() {
   const [isSpinning, setIsSpinning] = useState(false);
+  const [events, setEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const res = await fetch('/api/events', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          setEvents(data);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    }
+    fetchEvents();
+  }, []);
+
+  function formatDate(dateStr: string) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('no-NO', { 
+      day: 'numeric', 
+      month: 'long',
+      year: 'numeric'
+    });
+  }
 
   return (
     <PageContainer>
@@ -418,11 +454,33 @@ export default function Home() {
           {/* Events Section */}
           <Section id="events">
             <SubTitle>Arrangementer</SubTitle>
-            <ContentContainer>
-              {eventsWords.map((word, index) => (
-                <ContentWord key={index}>{word.word}</ContentWord>
-              ))}
-            </ContentContainer>
+            {events.length > 0 ? (
+              <ContentContainer style={{ width: '100%', gap: '2rem' }}>
+                {events.map((event) => (
+                  <div key={event.id} style={{
+                    background: '#fff',
+                    borderRadius: '12px',
+                    padding: '1.5rem',
+                    width: '100%',
+                    maxWidth: '600px',
+                    border: '2px solid #000'
+                  }}>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '0.5rem' }}>
+                      {event.title}
+                    </h3>
+                    <p style={{ color: '#666', marginBottom: '0.5rem' }}>{event.description}</p>
+                    <p style={{ color: '#A2D5AB', fontWeight: 'bold', background: '#000', display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+                      📅 {formatDate(event.date)} | ⏰ {event.time}
+                    </p>
+                    <p style={{ color: '#666', marginTop: '0.5rem' }}>📍 {event.location}</p>
+                  </div>
+                ))}
+              </ContentContainer>
+            ) : (
+              <ContentContainer>
+                <ContentWord>Ingen arrangementer ennå</ContentWord>
+              </ContentContainer>
+            )}
           </Section>
 
           {/* Contact Section */}
